@@ -1,3 +1,22 @@
+def read_leftToRight(sentence):
+    temp_sentence = ""
+    temp_word = ""
+    for char in sentence:
+        if char != " ":      
+           temp_word+= char
+
+           if temp_word in vocab:
+                temp_sentence += temp_word + " "
+                temp_word = "" 
+    return temp_sentence
+
+# def read_rightToLeft(sentence):
+#     temp_sentence = ""
+#     temp_word = ""
+
+    
+
+#     return pass
 
 def parse(phrase, vocab):
     """return a set of all possible phrases using vocabulary words"""
@@ -30,32 +49,32 @@ def parse(phrase, vocab):
 
 
     # Run through phrase from right to left
-        # temp sentence is empty
-        # split sentence into sentence list by spacs
-        # reverse sentence list
-        # Join rev_senetency by spaces
-
-        # temp_sentence is an empty string
-        # iterate throught rev_sentence
-            # if temp_sentence in vocab set
-                # add space t0 temp sentence
-            # if temp_sentence not in vocab set
-                # add character to temp sentence
-
+     
+    sentences=set()
     temp_sentence = ""
     temp_word = ""
 
-    for i,char in enumerate(phrase):
+    for char in phrase:
         temp_word+= char
 
         if temp_word in vocab:
             temp_sentence += temp_word + " "
-            temp_word = ""
-
-       
+            temp_word = ""       
 
     print('sentence ====>', temp_sentence)
 
+    # sentences.add(temp_sentence)
+    # print('set of sentences....',sentences)
+
+    sentence = temp_sentence
+    sentences.add(sentence)
+    sentences.add(read_leftToRight(sentence))
+    # sentences.add(read_rightToLeft(sentence))
+
+    
+    for sentence in sentences:
+
+        print('set of sentences....',sentence)
 
 
 vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
