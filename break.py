@@ -1,22 +1,4 @@
-def read_leftToRight(sentence):
-    temp_sentence = ""
-    temp_word = ""
-    for char in sentence:
-        if char != " ":      
-           temp_word+= char
 
-           if temp_word in vocab:
-                temp_sentence += temp_word + " "
-                temp_word = "" 
-    return temp_sentence
-
-# def read_rightToLeft(sentence):
-#     temp_sentence = ""
-#     temp_word = ""
-
-    
-
-#     return pass
 
 def parse(phrase, vocab):
     """return a set of all possible phrases using vocabulary words"""
@@ -37,16 +19,6 @@ def parse(phrase, vocab):
         # Add phrase into sentence set
 
 
-    # Run through phrase from left to right
-
-        # temp_sentence is an empty string
-        # iterate throught sentence
-            # if not a space
-                # if temp_sentence in vocab set
-                    # add space t0 temp sentence
-                # if temp_sentence not in vocab set
-                    # add character to temp sentence
-
 
     # Run through phrase from right to left
      
@@ -63,12 +35,8 @@ def parse(phrase, vocab):
 
     print('sentence ====>', temp_sentence)
 
-    # sentences.add(temp_sentence)
-    # print('set of sentences....',sentences)
-
     sentence = temp_sentence
     sentences.add(sentence)
-    sentences.add(read_leftToRight(sentence))
     # sentences.add(read_rightToLeft(sentence))
 
     
