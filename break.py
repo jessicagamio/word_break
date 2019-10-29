@@ -22,10 +22,11 @@ def parse(phrase, vocab):
 
         # temp_sentence is an empty string
         # iterate throught sentence
-            # if temp_sentence in vocab set
-                # add space t0 temp sentence
-            # if temp_sentence not in vocab set
-                # add character to temp sentence
+            # if not a space
+                # if temp_sentence in vocab set
+                    # add space t0 temp sentence
+                # if temp_sentence not in vocab set
+                    # add character to temp sentence
 
 
     # Run through phrase from right to left
@@ -41,26 +42,42 @@ def parse(phrase, vocab):
             # if temp_sentence not in vocab set
                 # add character to temp sentence
 
+    temp_sentence = ""
+    temp_word = ""
+
+    for i,char in enumerate(phrase):
+        temp_word+= char
+
+        if temp_word in vocab:
+            temp_sentence += temp_word + " "
+            temp_word = ""
+
+       
+
+    print('sentence ====>', temp_sentence)
 
 
 
-
-class TestFunction(unittest.TestCase):
-    def test(self):
-        vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
-        self.assertEqual(parse('iatenoodlesfordinnertonight', vocab), 
-            {
-                    "i a ten oodles for dinner to night",
-                    "i a ten oodles for dinner tonight",
-                    "i a ten oodles ford inner to night",
-                    "i a ten oodles ford inner tonight",
-                    "i ate noodles for dinner to night",
-                    "i ate noodles for dinner tonight",
-                    "i ate noodles ford inner to night",
-                    "i ate noodles ford inner tonight"
-                }
-                )
+vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
+parse('iatenoodlesfordinnertonight', vocab) 
 
 
-if __name__=="__main__":
-    unittest.main()
+# class TestFunction(unittest.TestCase):
+#     def test(self):
+#         vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
+#         self.assertEqual(parse('iatenoodlesfordinnertonight', vocab), 
+#             {
+#                     "i a ten oodles for dinner to night",
+#                     "i a ten oodles for dinner tonight",
+#                     "i a ten oodles ford inner to night",
+#                     "i a ten oodles ford inner tonight",
+#                     "i ate noodles for dinner to night",
+#                     "i ate noodles for dinner tonight",
+#                     "i ate noodles ford inner to night",
+#                     "i ate noodles ford inner tonight"
+#                 }
+#                 )
+
+
+# if __name__=="__main__":
+#     unittest.main()
