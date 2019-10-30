@@ -30,24 +30,27 @@ def createTreeNodes(phrase, vocab, idx=0):
             print('char -->',char, '| word --->', word)
             if word.startswith(char):
                 print(word, ' start with ', char)
-                if  vocab_dictionary[char]!=[]:
+                if  vocab_dictionary.get(char):
                     vocab_dictionary[char] = vocab_dictionary[char].append(word)
-                    print('dictionary--->', vocab_dictionary[char])
-                vocab_dictionary[char] = [word]
-
-
-
+                    
+                else:
+                    vocab_dictionary[char] = [word]
+                
 
     # creat node
     node = Node(phrase[idx])
 
     key = node.data
 
-    for data in vocab_dictionary[key]:
-        if phrase[idx:].startswith(data):
-            node.children.append(data)
-            print('char------------>', data)
+    words = vocab_dictionary.get(key)
 
+    # check to see if current phrase starts with words from dictionnary
+    for word in words:
+        if phrase[idx:].startswith(word):
+            node.children.append(word)
+            print('char------------>', word)
+
+    # Use len of each child and add on to index to analyze next phrase
     for child in node.children:
         new_idx = idx + len(child)
         createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
