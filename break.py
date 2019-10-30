@@ -14,9 +14,25 @@ class Tree(object):
 
 
 
-def parse(phrase, vocab):
+
+def parse(phrase, vocab, index=0):
     """return a set of all possible phrases using vocabulary words"""
 
+    # Create a dictionary of vocab words
+
+    phrase_list = phrase.split('')
+    phrase_set = set(phrase_list)
+
+    vocab_dictionary = {}
+
+    for char in phrase_set:
+        for word in vocab:
+            if word.startswith(char):
+                if  vocab_dictionary[char]:
+                    vocab_dictionary[char] += word
+                vocab_dictionary[char] = word
+
+    
 
 
 
