@@ -17,9 +17,7 @@ class Tree(object):
 
 def createTreeNodes(phrase, vocab, idx=0):
     phrase_list = [char for char in phrase]
-    print('list--->',phrase_list)
     phrase_set = set(phrase_list)
-    print('set--->', phrase_set)
 
     # create a dictionary of the vocab words
     vocab_dictionary = {}
@@ -27,16 +25,18 @@ def createTreeNodes(phrase, vocab, idx=0):
     for char in phrase_set:
         for word in vocab:
             # print('vocab-------.', vocab)
-            print('char -->',char, '| word --->', word)
+            # print('char -->',char, '| word --->', word)
             if word.startswith(char):
-                print(word, ' start with ', char)
+                # print(word, ' start with ', char)
                 if  vocab_dictionary.get(char):
-                    vocab_dictionary[char] = vocab_dictionary[char].append(word)
+                    print('word list ---->', vocab_dictionary[char])
+                    vocab_dictionary[char].append(word)
+                    print('after appending --->>>', vocab_dictionary[char])
                     
                 else:
                     vocab_dictionary[char] = [word]
                 
-
+"""
     # creat node
     node = Node(phrase[idx])
 
@@ -55,7 +55,7 @@ def createTreeNodes(phrase, vocab, idx=0):
         new_idx = idx + len(child)
         createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
 
-
+"""
 
 
 
