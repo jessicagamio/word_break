@@ -1,38 +1,76 @@
 
 class Node(object):
     """Create Node"""
-    def __init__(self, data):
+    def __init__(self, data, children = None):
         """Initializes instance"""
         self.data = data
-        self.children = []
+        self.children = children or []
 
 class Tree(object):
     """Creat Tree"""
-    def __init__(self):
-        self.root = None
+    def __init__(self, root = None):
+        if self.root == None:
+            self.root = self
             
 
 
 
-
-def parse(phrase, vocab, index=0):
-    """return a set of all possible phrases using vocabulary words"""
-
-    # Create a dictionary of vocab words
-
-    phrase_list = phrase.split('')
+def createTreeNodes(phrase, vocab, idx=0):
+    phrase_list = [char for char in phrase]
+    print('list--->',phrase_list)
     phrase_set = set(phrase_list)
+    print('set--->', phrase_set)
 
+    # create a dictionary of the vocab words
     vocab_dictionary = {}
 
     for char in phrase_set:
         for word in vocab:
+            # print('vocab-------.', vocab)
+            print('char -->',char, '| word --->', word)
             if word.startswith(char):
-                if  vocab_dictionary[char]:
-                    vocab_dictionary[char] += word
-                vocab_dictionary[char] = word
+                print(word, ' start with ', char)
+                if  vocab_dictionary[char]!=[]:
+                    vocab_dictionary[char] = vocab_dictionary[char].append(word)
+                    print('dictionary--->', vocab_dictionary[char])
+                vocab_dictionary[char] = [word]
 
+
+
+
+    # creat node
+    node = Node(phrase[idx])
+
+    key = node.data
+
+    for data in vocab_dictionary[key]:
+        if phrase[idx:].startswith(data):
+            node.children.append(data)
+            print('char------------>', data)
+
+    for child in node.children:
+        new_idx = idx + len(child)
+        createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
+
+
+
+
+
+# def parse(phrase, vocab, index=0):
+#     """return a set of all possible phrases using vocabulary words"""
+
+#     return sentences = Tree(createTreeNodes(phrase, vocab))
+
+
+    # Traverse tree
     
+vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
+createTreeNodes('iatenoodlesfordinnertonight', vocab)
+
+
+
+
+
 
 
 
@@ -80,8 +118,7 @@ def parse(phrase, vocab, index=0):
     #     print('set of sentences....',sentence)
 
 
-vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
-parse('iatenoodlesfordinnertonight', vocab) 
+
 
 
 # class TestFunction(unittest.TestCase):
