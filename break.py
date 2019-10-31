@@ -24,15 +24,9 @@ def createTreeNodes(phrase, vocab, idx=0):
 
     for char in phrase_set:
         for word in vocab:
-            # print('vocab-------.', vocab)
-            # print('char -->',char, '| word --->', word)
             if word.startswith(char):
-                # print(word, ' start with ', char)
                 if  vocab_dictionary.get(char):
-                    print('word list ---->', vocab_dictionary[char])
-                    vocab_dictionary[char].append(word)
-                    print('after appending --->>>', vocab_dictionary[char])
-                    
+                    vocab_dictionary[char].append(word)     
                 else:
                     vocab_dictionary[char] = [word]
                 
@@ -44,29 +38,31 @@ def createTreeNodes(phrase, vocab, idx=0):
 
     words = vocab_dictionary.get(key)
 
-    # check to see if current phrase starts with words from dictionary
-    for word in words:
-        if phrase[idx:].startswith(word):
-            node.children.append(word)
-            print('char------------>', word)
+    if words:
+        print('words------->',words)
+        # check to see if current phrase starts with words from dictionary
+        for word in words:
+            if phrase[idx:].startswith(word):
+                node.children.append(word)
+                print('child------------>', word)
 
-    # Use len of each child and add on to index to analyze next phrase
-    for child in node.children:
-        new_idx = idx + len(child)
-        createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
+        # Use len of each child and add on to index to analyze next phrase
+        for child in node.children:
+            new_idx = idx + len(child)
+            createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
 
 
 
 
 
-# def parse(phrase, vocab, index=0):
-#     """return a set of all possible phrases using vocabulary words"""
+def parse(phrase, vocab, index=0):
+    """return a set of all possible phrases using vocabulary words"""
 
-#     return sentences = Tree(createTreeNodes(phrase, vocab))
+    sentences = Tree(createTreeNodes(phrase, vocab))
 
 
     # Traverse tree depth first to find all possible sentences
-    
+
     
 vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
 createTreeNodes('iatenoodlesfordinnertonight', vocab)
