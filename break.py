@@ -36,7 +36,7 @@ def createTreeNodes(phrase, vocab, idx=0):
                 else:
                     vocab_dictionary[char] = [word]
                 
-"""
+
     # creat node
     node = Node(phrase[idx])
 
@@ -44,7 +44,7 @@ def createTreeNodes(phrase, vocab, idx=0):
 
     words = vocab_dictionary.get(key)
 
-    # check to see if current phrase starts with words from dictionnary
+    # check to see if current phrase starts with words from dictionary
     for word in words:
         if phrase[idx:].startswith(word):
             node.children.append(word)
@@ -55,7 +55,7 @@ def createTreeNodes(phrase, vocab, idx=0):
         new_idx = idx + len(child)
         createTreeNodes(phrase[new_idx:], vocab, idx = new_idx)
 
-"""
+
 
 
 
@@ -65,7 +65,8 @@ def createTreeNodes(phrase, vocab, idx=0):
 #     return sentences = Tree(createTreeNodes(phrase, vocab))
 
 
-    # Traverse tree
+    # Traverse tree depth first to find all possible sentences
+    
     
 vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to', 'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
 createTreeNodes('iatenoodlesfordinnertonight', vocab)
